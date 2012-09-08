@@ -3,7 +3,7 @@
 //  GravRock
 //
 //  Created by Justin Shacklette on 9/5/12.
-//  Copyright __MyCompanyName__. All rights reserved.
+//  Copyright Saturnboy. All rights reserved.
 //
 
 #import "Rock.h"

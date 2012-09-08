@@ -3,7 +3,7 @@
 //  GravRockCollisions
 //
 //  Created by Justin Shacklette on 9/6/12.
-//  Copyright __MyCompanyName__. All rights reserved.
+//  Copyright Saturnboy. All rights reserved.
 //
 
 #import "cocos2d.h"

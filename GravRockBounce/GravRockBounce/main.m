@@ -3,7 +3,7 @@
 //  GravRockBounce
 //
 //  Created by Justin Shacklette on 9/6/12.
-//  Copyright __MyCompanyName__ 2012. All rights reserved.
+//  Copyright Saturnboy 2012. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
