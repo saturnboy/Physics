@@ -12,9 +12,8 @@
 
 #define PX_TO_M (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 50 : 25)
 #define BOUNCE_RESTITUTION 0.5f
-#define ACCELEROMETER_MIN 0.001f
 #define ACCELEROMETER_INTERP_FACTOR 0.1f
-#define MAX_ROCKS 10
+#define MAX_ROCKS 20
 
 #pragma mark - HelloWorldLayer
 
