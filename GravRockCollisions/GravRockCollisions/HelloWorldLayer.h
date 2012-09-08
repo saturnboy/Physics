@@ -10,15 +10,10 @@
 @class Rock;
 
 @interface HelloWorldLayer : CCLayer {
-    CCArray *_rocks;
-    CGSize _rocksize;
     CGSize _winsize;
-    CCSprite *_arrow;
-
     CGPoint _accelerometer;
-    CGPoint _min;
-    CGPoint _max;
-    CGRect _bounds;
+    CCArray *_rocks;
+    CCSprite *_arrow;
 }
 
 +(CCScene *) scene;

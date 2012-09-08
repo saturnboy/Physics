@@ -51,16 +51,6 @@
         // init rocks array
         _rocks = [[CCArray alloc] initWithCapacity:MAX_ROCKS];    
         
-        // init rock
-        Rock *rock = [self makeRock:ccp(0,0)];
-        _rocksize = rock.boundingBox.size;
-        CCLOG(@"rock : size=%.0fx%.0f", _rocksize.width, _rocksize.height);
-        
-        // compute rock bounds on screen
-        _min = ccp(_rocksize.width/2, _rocksize.height/2);
-        _max = ccpSub(ccpFromSize(_winsize), _min);
-        _bounds = CGRectMake(_min.x, _min.y, _max.x-_min.x, _max.y-_min.y);
-        
         // init arrow
         _arrow = [CCSprite spriteWithSpriteFrameName:@"arrow.png"];
         _arrow.position = ccp(_winsize.width/2, _winsize.height/2);
@@ -81,20 +71,20 @@
         rock.vel = ccpAdd(rock.vel, ccpMult(rock.acc, dt));
 
         // bounce the rock off the walls
-        if (rock.position.y < _min.y) {
-            rock.position = ccp(rock.position.x, _min.y);
+        if (rock.position.y < rock.radius) {
+            rock.position = ccp(rock.position.x, rock.radius);
             rock.vel = ccp(rock.vel.x, -rock.vel.y * BOUNCE_RESTITUTION);
         }
-        if (rock.position.y > _max.y) {
-            rock.position = ccp(rock.position.x, _max.y);
+        if (rock.position.y > (_winsize.height - rock.radius)) {
+            rock.position = ccp(rock.position.x, _winsize.height - rock.radius);
             rock.vel = ccp(rock.vel.x, -rock.vel.y * BOUNCE_RESTITUTION); 
         }
-        if (rock.position.x < _min.x) {
-            rock.position = ccp(_min.x, rock.position.y); 
+        if (rock.position.x < rock.radius) {
+            rock.position = ccp(rock.radius, rock.position.y); 
             rock.vel = ccp(-rock.vel.x * BOUNCE_RESTITUTION, rock.vel.y); 
         }
-        if (rock.position.x > _max.x) {
-            rock.position = ccp(_max.x, rock.position.y); 
+        if (rock.position.x > _winsize.width - rock.radius) {
+            rock.position = ccp(_winsize.width - rock.radius, rock.position.y); 
             rock.vel = ccp(-rock.vel.x * BOUNCE_RESTITUTION, rock.vel.y);
         }
         
@@ -177,7 +167,7 @@
     CCLOG(@"touch (%.0f,%.0f)", pos.x, pos.y);
     
     // add rock to world
-    if (_rocks.count < MAX_ROCKS && CGRectContainsPoint(_bounds, pos)) {
+    if (_rocks.count < MAX_ROCKS) {
         Rock *rock = [self makeRock:pos];
         [self addChild:rock z:1 tag:100 + _rocks.count];
         
@@ -194,7 +184,7 @@
     rock.vel = ccp(0,0);
     rock.acc = ccp(0,0);
     rock.mass = 1.0f;
-    rock.radius = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 1 : 0.5) * _rocksize.width;
+    rock.radius = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? 1 : 0.5) * rock.boundingBox.size.width;
     return rock;
 }
 
