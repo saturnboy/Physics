@@ -12,6 +12,7 @@
 
 #define TAG_SPRITESHEET 1
 #define TAG_ARROW 2
+
 #define ACCELEROMETER_INTERP_FACTOR 0.1f
 #define MAX_CRATES 16
 
@@ -129,7 +130,7 @@
     // Define the dynamic body.
 	b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(pos.x/PTM_RATIO, pos.y/PTM_RATIO);
+	bodyDef.position.Set(crate.position.x/PTM_RATIO, crate.position.y/PTM_RATIO);
     bodyDef.userData = crate;
     bodyDef.allowSleep = false;
 	b2Body *body = _world->CreateBody(&bodyDef);
@@ -176,7 +177,7 @@
 - (void) accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {    
     _accelerometer = ccpLerp(_accelerometer, ccp(-acceleration.x, -acceleration.y), ACCELEROMETER_INTERP_FACTOR);
     float angle = -CC_RADIANS_TO_DEGREES(ccpToAngle(_accelerometer));
-    CCLOG(@"ang=%.3f mag=%.5f", angle, ccpLength(_accelerometer));
+    //CCLOG(@"ang=%.3f mag=%.5f", angle, ccpLength(_accelerometer));
     
     // rotate arrow
     _arrow.rotation = angle + 180.0f;
