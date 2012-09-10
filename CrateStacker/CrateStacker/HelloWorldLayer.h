@@ -18,7 +18,8 @@
 
 @interface HelloWorldLayer : CCLayer {
     CGSize _winsize;
-	b2World *_world;
+    b2World *_world;
+    GLESDebugDraw *_debug;
 }
 
 +(CCScene *) scene;
